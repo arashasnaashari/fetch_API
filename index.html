@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #fact{
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <input type="number" id="number">
+    <div id="fact">
+        <h3>Number fact</h3>
+        <p id="text"></p>
+    </div>
+
+
+
+    <script>
+        let fact = document.querySelector('#fact')
+        let text = document.querySelector('#text')
+
+        let numberInput = document.querySelector('#number')
+        numberInput.addEventListener('click',getFetch)
+
+        // function getAjax() {
+        //     let number = numberInput.value
+            
+        //     let xhr = new XMLHttpRequest()
+        //     xhr.open('GET','http://numbersapi.com/'+ number)
+
+        //     xhr.onload = function() {
+        //         if(this.status == 200 && number != ''){
+        //             fact.style.display = 'block'
+        //             text.innerHTML = this.responseText
+        //         }
+        //     }
+
+        //     xhr.send()
+        // }
+
+
+
+        function getFetch() {
+            let number = numberInput.value
+            
+            fetch('http://numbersapi.com/'+ number)
+                .then(res => res.text())
+                .then(data => {
+                    if(number !== '') {
+                        fact.style.display = 'block'
+                        text.innerHTML = data
+                    }
+                })
+                .catch(err => console.log(err))
+        }
+    </script>
+</body>
+</html>
